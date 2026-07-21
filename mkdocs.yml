@@ -1,0 +1,46 @@
+site_name: 성제한 연구 노트
+site_description: 논문 리뷰와 실험 기록
+site_url: https://example.github.io/research-blog/
+
+theme:
+  name: material
+  language: ko
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: 다크 모드로 전환
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: 라이트 모드로 전환
+  features:
+    - navigation.tabs
+    - navigation.top
+    - content.code.copy
+    - toc.integrate
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - attr_list
+  - md_in_html
+  - tables
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - 소개: index.md
+  - 논문 리뷰:
+      - "FAST-Calib: LiDAR-Camera Extrinsic Calibration in One Second": posts/fast-calib-review.md
