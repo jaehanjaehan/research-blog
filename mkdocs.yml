@@ -44,3 +44,5 @@ nav:
   - 소개: index.md
   - 논문 리뷰:
       - "FAST-Calib: LiDAR-Camera Extrinsic Calibration in One Second": posts/fast-calib-review.md
+  - 기술 조사:
+      - "NVIDIA Isaac ROS NITROS: 득실과 실제 제약 정리": posts/nitros-review.md
