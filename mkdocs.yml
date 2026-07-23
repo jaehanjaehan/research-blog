@@ -46,3 +46,4 @@ nav:
       - "FAST-Calib: LiDAR-Camera Extrinsic Calibration in One Second": posts/fast-calib-review.md
   - 기술 조사:
       - "NVIDIA Isaac ROS NITROS: 득실과 실제 제약 정리": posts/nitros-review.md
+      - "ROS2 노드 컴포지션: 개념과 실제 성능 임팩트": posts/ros2-composition.md

@@ -9,3 +9,4 @@
 ## 기술 조사
 
 - [NVIDIA Isaac ROS NITROS: 득실과 실제 제약 정리](posts/nitros-review.md) — zero-copy GPU 메시지 전송의 실제 전제조건과 비용
+- [ROS2 노드 컴포지션: 개념과 실제 성능 임팩트](posts/ros2-composition.md) — NITROS의 "같은 프로세스" 전제조건을 만드는 메커니즘 실측
