@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://jaehanjaehan.github.io/research-blog/</loc>
+         <lastmod>2026-09-09</lastmod>
+    </url>
+    <url>
+         <loc>https://jaehanjaehan.github.io/research-blog/portfolio/</loc>
+         <lastmod>2026-09-09</lastmod>
+    </url>
+    <url>
+         <loc>https://jaehanjaehan.github.io/research-blog/portfolio/en/</loc>
+         <lastmod>2026-09-09</lastmod>
+    </url>
+    <url>
+         <loc>https://jaehanjaehan.github.io/research-blog/portfolio/ko/</loc>
+         <lastmod>2026-09-09</lastmod>
+    </url>
+    <url>
+         <loc>https://jaehanjaehan.github.io/research-blog/posts/fast-calib-review/</loc>
+         <lastmod>2026-09-09</lastmod>
+    </url>
+    <url>
+         <loc>https://jaehanjaehan.github.io/research-blog/posts/nitros-review/</loc>
+         <lastmod>2026-09-09</lastmod>
+    </url>
+    <url>
+         <loc>https://jaehanjaehan.github.io/research-blog/posts/ros2-composition/</loc>
+         <lastmod>2026-09-09</lastmod>
+    </url>
+</urlset>

@@ -1,0 +1,1085 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="포트폴리오와 논문 리뷰">
+      
+      
+      
+        <link rel="canonical" href="https://jaehanjaehan.github.io/research-blog/posts/nitros-review/">
+      
+      
+        <link rel="prev" href="../fast-calib-review/">
+      
+      
+        <link rel="next" href="../ros2-composition/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>NVIDIA Isaac ROS NITROS: 득실과 실제 제약 정리 - 성제한 · Vision Perception Engineer</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nvidia-isaac-ros-nitros" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="성제한 · Vision Perception Engineer" class="md-header__button md-logo" aria-label="성제한 · Vision Perception Engineer" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            성제한 · Vision Perception Engineer
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NVIDIA Isaac ROS NITROS: 득실과 실제 제약 정리
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  소개
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../portfolio/" class="md-tabs__link">
+          
+  
+  
+  포트폴리오
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../fast-calib-review/" class="md-tabs__link">
+          
+  
+  
+  논문 리뷰
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  기술 조사
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="성제한 · Vision Perception Engineer" class="md-nav__button md-logo" aria-label="성제한 · Vision Perception Engineer" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    성제한 · Vision Perception Engineer
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    소개
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    포트폴리오
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    포트폴리오
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portfolio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개요
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portfolio/ko/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    슬라이드 (한국어)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../portfolio/en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slides (English)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    논문 리뷰
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    논문 리뷰
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fast-calib-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAST-Calib: LiDAR-Camera Extrinsic Calibration in One Second
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기술 조사
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    기술 조사
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVIDIA Isaac ROS NITROS: 득실과 실제 제약 정리
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NVIDIA Isaac ROS NITROS: 득실과 실제 제약 정리
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        왜 조사했는가
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nitros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NITROS가 하는 일
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실제로 얻는 이득
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        문제점과 실제 제약
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="문제점과 실제 제약">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-zero-copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Zero-copy는 "같은 프로세스"일 때만 성립한다
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 버전이 장비 전체에 고정된다
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 실제로 보고된 문제들
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        득실 정리
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        그래서 언제 쓸 가치가 있는가
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ros2-composition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ROS2 노드 컴포지션: 개념과 실제 성능 임팩트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="nvidia-isaac-ros-nitros">NVIDIA Isaac ROS NITROS: 득실과 실제 제약 정리</h1>
+<div class="admonition note">
+<p class="admonition-title">참고 자료</p>
+<p>본 글은 NVIDIA Isaac ROS 공식 문서(<a href="https://nvidia-isaac-ros.github.io/concepts/nitros/index.html">NITROS 개념 문서</a>,
+<a href="https://nvidia-isaac-ros.github.io/faq/index.html">FAQ</a>), <a href="https://developer.nvidia.com/blog/improve-perception-performance-for-ros-2-applications-with-nvidia-isaac-transport-for-ros/">NVIDIA 기술 블로그</a>,
+<a href="https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_nitros/issues">Isaac ROS GitHub 이슈</a>와
+<a href="https://forums.developer.nvidia.com/c/agx-autonomous-machines/isaac/isaac-ros/600">개발자 포럼</a>의
+공개 게시물을 바탕으로 정리했다.</p>
+</div>
+<h2 id="_1">왜 조사했는가</h2>
+<p>GPU에서 이미지/포인트클라우드를 가공한 뒤 ROS2 토픽으로 내보내는 파이프라인을
+설계하다 보면, GPU 메모리에서 CPU 메모리로 복사한 뒤 DDS로 직렬화해서 보내고
+받는 쪽에서 다시 GPU로 올리는 왕복 비용이 눈에 밟힌다. "그럼 아예 GPU
+메모리에 상주한 채로 노드 간에 주고받으면 되지 않나"라는 질문에 대한
+NVIDIA의 답이 NITROS다. 실제로 이 조사는 진행 중인 depth-RGB 정합 모듈의
+연산 백엔드를 CPU/GPU 중 무엇으로 할지 검토하다가 나온 것이다 — 다만
+결론부터 말하면, <strong>"쓸 수 있다"와 "지금 쓰는 게 합리적이다"는 다른 문제</strong>였다.</p>
+<h2 id="nitros">NITROS가 하는 일</h2>
+<p>NITROS(NVIDIA Isaac Transport for ROS)는 두 가지 메커니즘의 조합이다.</p>
+<ul>
+<li><strong>타입 적응(Type Adaptation, REP-2007)</strong>: ROS 노드가 표준 메시지 타입 대신
+  하드웨어 가속기에 최적화된 포맷으로 데이터를 주고받을 수 있게 한다. 이
+  적응된 타입을 쓰면 CPU와 가속기(GPU) 메모리 사이의 복사를 없앨 수 있다.</li>
+<li><strong>타입 협상(Type Negotiation, REP-2009)</strong>: 그래프 안의 노드들이 런타임에
+  서로 지원하는 데이터 포맷을 알리고, ROS 프레임워크가 그중 최적의 조합을
+  골라준다. 기존(비-NITROS) 노드와도 호환은 유지된다.</li>
+</ul>
+<p>두 NITROS 노드가 그래프에서 인접해 있으면 서로를 발견해서 타입 적응으로
+데이터를 공유한다 — 이게 "zero-copy" 전송이다.</p>
+<figure>
+<p><img alt="비효율적 vs 효율적 하드웨어 가속 파이프라인" src="../assets/nitros/nitros_pipeline_efficiency.gif" />
+  </p>
+<figcaption>위: 매 노드가 CPU로 이미지를 돌려받아 처리한 뒤 다시 GPU로 넘기는
+  구조 — 노드마다 CPU↔GPU 왕복이 반복된다. 아래: 이미지 자체는 GPU에 그대로
+  두고, 각 노드는 "티켓"(포인터/핸들)만 주고받는 구조 — NITROS의 타입
+  적응/협상이 만드는 게 이쪽. NVIDIA Isaac ROS 공식 문서 및
+  <a href="https://developer.nvidia.com/blog/improve-perception-performance-for-ros-2-applications-with-nvidia-isaac-transport-for-ros/">NVIDIA
+  기술 블로그</a>에서 인용.</figcaption>
+</figure>
+<h2 id="_2">실제로 얻는 이득</h2>
+<p>NVIDIA 자체 벤치마크에 따르면, <strong>최소한의 연산만 하는 노드로 구성된
+그래프</strong>(프레임워크 자체의 오버헤드만 측정하기 위한 설계) 기준으로 ROS 2
+Foxy 대비 타입 적응/협상을 켰을 때 <strong>Xavier에서 3배, Orin에서 7배</strong> 개선을
+보고했다.</p>
+<figure>
+<p><img alt="Foxy 대비 Humble+NITROS 프레임워크 성능 비교" src="../assets/nitros/nitros_benchmark.png" />
+  </p>
+<figcaption>1080p 기준 Jetson AGX Xavier(2.8배)와 Jetson AGX Orin(7배)에서
+  ROS 2 Foxy 대비 타입 적응 프레임워크(Humble)의 처리량 비교. 출처:
+  <a href="https://developer.nvidia.com/blog/improve-perception-performance-for-ros-2-applications-with-nvidia-isaac-transport-for-ros/">NVIDIA
+  기술 블로그</a>.</figcaption>
+</figure>
+<p>이 수치를 읽을 때 주의할 점이 하나 있다 — 이건 <strong>"프레임워크(전송) 오버헤드
+자체"를 고립시켜 측정한 값</strong>이지, 실제 애플리케이션(연산이 실제로 무거운
+파이프라인) 전체의 속도 향상 배수가 아니다. 전체 파이프라인에서 전송 비용이
+차지하는 비중이 작다면(연산 자체가 무거운 경우), 체감 개선폭은 이보다 훨씬
+작아진다. NVIDIA가 공개한 예시 파이프라인은 AprilTag 검출, 스테레오
+디스패리티(스테레오 카메라 → 정류 → DNN 추론 → 포인트클라우드), 이미지
+세그멘테이션 세 가지다.</p>
+<h2 id="_3">문제점과 실제 제약</h2>
+<p>여기가 가장 중요한 부분이다. 공식 문서와 실제 이슈 트래커를 같이 보면,
+"zero-copy를 그냥 켜기만 하면 되는" 기능이 아니라는 게 드러난다.</p>
+<h3 id="1-zero-copy">1. Zero-copy는 "같은 프로세스"일 때만 성립한다</h3>
+<p>공식 문서에 명시된 조건이다: <strong>"NITROS의 zero-copy 이득을 보려면 가속된
+노드들이 전부 같은 프로세스에서 실행돼야 한다."</strong> 즉 <a href="https://docs.ros.org/en/humble/Concepts/Intermediate/About-Composition.html">ROS2
+컴포지션</a>
+(component container에 여러 노드를 로드해서 한 프로세스로 묶는 방식)이
+전제다. 각자 별도 프로세스로 <code>ros2 run</code>한 노드 두 개는 NITROS를 쓰더라도
+zero-copy가 안 된다 — 이건 아키텍처를 처음부터 컴포지션 가능한 형태로
+설계해야 한다는 뜻이라, 기존에 독립 프로세스로 짜여 있던 노드들을 옮기려면
+실제로 재구조화가 필요하다. 컴포지션이 정확히 뭘 하는지, zero-copy의
+내부 동작 원리와 그 자체의 트레이드오프(특히 장애 격리를 잃는다는 점)는
+별도로 조사해서 <a href="../ros2-composition/">ROS2 노드 컴포지션 리뷰</a>에 정리했다.</p>
+<p>추가로 <strong>토픽 하나당 협상하는(negotiating) 퍼블리셔가 1개만 허용</strong>된다는
+제약도 있다 — 같은 토픽에 여러 발행자를 두는 흔한 패턴(예: 디버그용 리플레이
+발행자를 따로 두는 것)이 NITROS 협상 경로에서는 그대로 못 쓰인다.</p>
+<h3 id="2">2. 버전이 장비 전체에 고정된다</h3>
+<p>Isaac ROS는 특정 JetPack/CUDA/TensorRT/ROS2 조합에 강하게 묶여 있다.
+예를 들어 release-3.2는 JetPack 6.1과 Docker Engine 27.2.0 이상을 요구하고,
+이전 버전(JetPack 5.1.2, Ubuntu 20.04, Jetson Xavier)에 대한 지원은 이미
+제거됐다. 이건 <strong>NITROS를 쓰는 노드 하나만의 문제가 아니라, 같은 장비에서
+돌아가는 다른 소프트웨어(SLAM 등) 전부가 그 버전 조합 안에서 움직여야
+한다는 뜻</strong>이다 — 부분 채택이 기술적으로는 가능해도(비-NITROS 노드와
+호환은 유지됨), 장비 전체의 OS/드라이버/런타임 버전 고정이라는 비용은
+그대로 남는다.</p>
+<h3 id="3">3. 실제로 보고된 문제들</h3>
+<ul>
+<li><strong>빌드/의존성</strong>: <code>magic_enum.hpp</code>, <code>nvToolsExt.h</code> 등 헤더를 못 찾는 빌드
+  실패가 <a href="https://forums.developer.nvidia.com/t/issues-with-building-isaac-ros-nitros-and-related-packages-due-to-magic-enum-dependency/323262">보고</a>됐다.</li>
+<li><strong>컴포지션 시 QoS 충돌</strong>: 같은 컨테이너에 카메라 드라이버와 함께 노드를
+  올리고 intra-process 통신을 켜면 "intraprocess communication allowed
+  only with volatile durability"라는 예외가 발생하는 사례가
+  <a href="https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam/issues/141">보고</a>됐다
+  — ROS2의 intra-process 통신 자체가 QoS durability를 VOLATILE로 강제하는데,
+  다른 이유로 TRANSIENT_LOCAL 같은 durability가 필요한 토픽이 섞여 있으면
+  컴포지션이 깨진다는 뜻이다.</li>
+<li><strong>타입 연결 난이도</strong>: 기존 ROS2 노드에 NITROS 타입(TensorList 등)을
+  가져다 쓰려는 개발자들이 라이브러리 링킹 단계에서 막히는 사례가 여럿
+  보고됐다 — 진입장벽이 "몇 줄 추가"보다는 크다는 정황.</li>
+</ul>
+<h2 id="_4">득실 정리</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>얻는 것</th>
+<th>잃는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>성능</td>
+<td>전송 오버헤드 자체는 최대 수 배 개선(프레임워크 기준)</td>
+<td>컴포지션 전제라 기존 프로세스 구조 재설계 필요</td>
+</tr>
+<tr>
+<td>상호운용성</td>
+<td>비-NITROS 노드와 호환 유지(표준 인터페이스)</td>
+<td>zero-copy 자체는 NITROS-NITROS 쌍에서만, 그것도 같은 프로세스 한정</td>
+</tr>
+<tr>
+<td>유지보수</td>
+<td>NVIDIA가 관리하는 가속 구현을 그대로 사용</td>
+<td>JetPack/CUDA/TensorRT/ROS2 버전이 장비 전체에 고정, 다른 노드도 그 제약을 같이 받음</td>
+</tr>
+<tr>
+<td>개발 경험</td>
+<td>공식 문서/예제 파이프라인 제공</td>
+<td>빌드 의존성, 컴포지션-QoS 충돌 등 실제 이슈가 다수 보고됨</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">그래서 언제 쓸 가치가 있는가</h2>
+<p>이 조사에서 얻은 실질적인 결론은, NITROS 채택 여부를 "GPU 가속이 필요한가"가
+아니라 <strong>"GPU 연산 자체가 느린가, 아니면 GPU↔CPU 복사가 느린가"</strong>로 나눠서
+판단해야 한다는 것이다.</p>
+<ul>
+<li>연산(추론, 렌더링 등) 자체가 병목이라면 CuPy/PyTorch 같은 GPU 연산
+  라이브러리로 옮기는 것만으로 대부분 해결된다 — 이건 일반 Python 의존성
+  추가 수준이라 장비 전체 버전 고정 같은 부담이 없다.</li>
+<li><strong>오직 "연산은 이미 충분히 빠른데, 프로세스 간 GPU↔CPU 복사 자체가 실측
+  병목으로 확인된" 경우에만</strong> NITROS/컴포지션으로 넘어갈 근거가 생긴다 —
+  그것도 컴포지션 가능한 아키텍처로의 재설계 비용과, 장비 전체 버전 고정
+  비용을 감수할 가치가 있는지 별도로 따져야 한다.</li>
+</ul>
+<p>즉 NITROS는 "GPU를 쓰는 방법"이 아니라 "이미 GPU를 쓰고 있는데 노드 간
+전송이 병목인 특정 상황을 위한 도구"에 더 가깝다. 이 구분을 안 하고
+"GPU=NITROS"로 바로 가면, 정작 필요하지도 않은 시스템 전체 버전 고정
+비용을 먼저 치르게 될 위험이 있다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
