@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="포트폴리오와 논문 리뷰">
+        <meta name="description" content="포트폴리오와 연구 노트">
       
       
       
@@ -16,7 +16,7 @@
         <link rel="prev" href="..">
       
       
-        <link rel="next" href="ko/">
+        <link rel="next" href="projects/forklift-perception/">
       
       
         
@@ -475,7 +475,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        주요 성과
+        주요 프로젝트
       
     </span>
   </a>
@@ -495,17 +495,6 @@
       
         <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        슬라이드 목록
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         연락처
@@ -531,14 +520,14 @@
   
   
     <li class="md-nav__item">
-      <a href="ko/" class="md-nav__link">
+      <a href="projects/forklift-perception/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    슬라이드 (한국어)
+    자율주행 무인 지게차 3D Perception
   
 
     
@@ -559,14 +548,98 @@
   
   
     <li class="md-nav__item">
-      <a href="en/" class="md-nav__link">
+      <a href="projects/sim2real-drone/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Slides (English)
+    Sim-to-Real 강화학습 드론 (장관상)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="projects/3d-slam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3D SLAM 시스템 참여
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="projects/multi-sensor-fusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multi-Sensor Fusion R&D
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="projects/isaac-sim-r-and-d/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Isaac Sim Sim-to-Real R&D
   
 
     
@@ -808,12 +881,13 @@
 
 <h1 id="_1">포트폴리오</h1>
 <p>Vision Perception Engineer · 3D Perception · Sensor Fusion · Edge Deployment</p>
-<h2 id="_2">주요 성과</h2>
+<h2 id="_2">주요 프로젝트</h2>
 <ul>
-<li><strong>삼성 P4 라인 5대 실가동</strong> · 검출 성공률 <strong>99.7%</strong> (6개월간 오검출 1~2회)</li>
-<li><strong>현대 울산 공장 3대 실가동</strong> · P5 라인 15대 추가 투입 논의 중</li>
-<li><strong>LG 라인 40대 투입 예정</strong> (2세대 시스템)</li>
-<li><strong>과학기술정보통신부 장관상</strong> (2022) — Sim-to-Real 자율주행 강화학습 비교 연구</li>
+<li><a href="projects/forklift-perception/"><strong>자율주행 무인 지게차 3D Perception</strong></a> — 국내 대형 제조사 라인 다수 배포 · 검출 성공률 99.7%</li>
+<li><a href="projects/sim2real-drone/"><strong>Sim-to-Real 강화학습 자율주행 드론</strong></a> — 과학기술정보통신부 장관상 (2022)</li>
+<li><a href="projects/3d-slam/"><strong>3D SLAM 시스템 참여</strong></a> — SC-LIO-SAM 기반 · 장기 안정성·동적 환경 대응 개선</li>
+<li><a href="projects/multi-sensor-fusion/"><strong>Multi-Sensor Fusion 통합 R&amp;D</strong></a> — RGB · Depth · LiDAR 융합 파이프라인 설계 (진행 중)</li>
+<li><a href="projects/isaac-sim-r-and-d/"><strong>Isaac Sim 기반 Sim-to-Real R&amp;D</strong></a> — Reality Gap 파라미터화 · 검증 파이프라인 (진행 중)</li>
 </ul>
 <h2 id="_3">핵심 축</h2>
 <table>
@@ -826,11 +900,11 @@
 <tbody>
 <tr>
 <td><strong>모델 R&amp;D</strong></td>
-<td>YOLO11x-seg 도메인 특화 학습 · TensorRT FP16 · SiLU 보존 최적화 · 15 FPS</td>
+<td>Detection · Segmentation · TensorRT 최적화 · 도메인 특화 학습</td>
 </tr>
 <tr>
 <td><strong>강건 인식</strong></td>
-<td>Kalman + 예측 오차 필터 · Temporal Consistency · Ring Sector Median</td>
+<td>Kalman + 예측 오차 필터 · Temporal Consistency · 노이즈 대응</td>
 </tr>
 <tr>
 <td><strong>센서 융합</strong></td>
@@ -842,7 +916,7 @@
 </tr>
 <tr>
 <td><strong>엣지 배포</strong></td>
-<td>TensorRT · ONNX · INT8/FP16 혼합 정밀도 · NITROS Zero-Copy · CUDA 커널</td>
+<td>TensorRT · ONNX · INT8/FP16 혼합 정밀도 · NITROS</td>
 </tr>
 <tr>
 <td><strong>MLOps</strong></td>
@@ -850,15 +924,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_4">슬라이드 목록</h2>
-<ul>
-<li><a href="ko/">슬라이드 뷰어 (한국어)</a> — 18장</li>
-<li><a href="en/">슬라이드 뷰어 (영문)</a> — 18 slides</li>
-</ul>
-<h2 id="_5">연락처</h2>
+<h2 id="_4">연락처</h2>
 <ul>
 <li><strong>Email</strong>: jaehan19@gmail.com</li>
-<li><strong>Phone</strong>: 010-6538-2041</li>
 </ul>
 
 
