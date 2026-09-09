@@ -1,6 +1,6 @@
-site_name: 성제한 연구 노트
-site_description: 논문 리뷰와 실험 기록
-site_url: https://example.github.io/research-blog/
+site_name: 성제한 · Vision Perception Engineer
+site_description: 포트폴리오와 논문 리뷰
+site_url: https://jaehanjaehan.github.io/research-blog/
 
 theme:
   name: material
@@ -22,6 +22,7 @@ theme:
         name: 라이트 모드로 전환
   features:
     - navigation.tabs
+    - navigation.sections
     - navigation.top
     - content.code.copy
     - toc.integrate
@@ -42,6 +43,10 @@ extra_javascript:
 
 nav:
   - 소개: index.md
+  - 포트폴리오:
+      - 개요: portfolio/index.md
+      - "슬라이드 (한국어)": portfolio/ko/index.md
+      - "Slides (English)": portfolio/en/index.md
   - 논문 리뷰:
       - "FAST-Calib: LiDAR-Camera Extrinsic Calibration in One Second": posts/fast-calib-review.md
   - 기술 조사:
