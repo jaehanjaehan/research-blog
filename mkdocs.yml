@@ -1,5 +1,5 @@
 site_name: 성제한 · Vision Perception Engineer
-site_description: 포트폴리오와 논문 리뷰
+site_description: 포트폴리오와 연구 노트
 site_url: https://jaehanjaehan.github.io/research-blog/
 
 theme:
@@ -45,8 +45,11 @@ nav:
   - 소개: index.md
   - 포트폴리오:
       - 개요: portfolio/index.md
-      - "슬라이드 (한국어)": portfolio/ko/index.md
-      - "Slides (English)": portfolio/en/index.md
+      - "자율주행 무인 지게차 3D Perception": portfolio/projects/forklift-perception.md
+      - "Sim-to-Real 강화학습 드론 (장관상)": portfolio/projects/sim2real-drone.md
+      - "3D SLAM 시스템 참여": portfolio/projects/3d-slam.md
+      - "Multi-Sensor Fusion R&D": portfolio/projects/multi-sensor-fusion.md
+      - "Isaac Sim Sim-to-Real R&D": portfolio/projects/isaac-sim-r-and-d.md
   - 논문 리뷰:
       - "FAST-Calib: LiDAR-Camera Extrinsic Calibration in One Second": posts/fast-calib-review.md
   - 기술 조사:
